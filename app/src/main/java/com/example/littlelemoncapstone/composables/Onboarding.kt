@@ -127,7 +127,7 @@ fun Onboarding(context: Context, navHostController: NavHostController) {
                         .putString("firstName", firstName.value)
                         .putString("lastName", lastName.value)
                         .putString("email", email.value)
-                        .putBoolean("userRegistered", true)
+                        .putBoolean("isRegistered", true)
                         .apply()
 
                     Toast.makeText(context,
