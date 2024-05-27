@@ -23,6 +23,7 @@ fun NavigationComposable(context: Context,navController: NavHostController) {
         composable(Onboarding.route){
         }
         composable(Home.route){
+            Home(navController)
         }
         composable(Profile.route){
         }
