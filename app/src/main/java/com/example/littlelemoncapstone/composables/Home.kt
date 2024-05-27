@@ -221,7 +221,11 @@ fun MenuCategories(categories: Set<String>, categoryLambda: (sel: String) -> Uni
         mutableStateOf("")
     }
 
-    Card(elevation = 10.dp, modifier = Modifier.fillMaxWidth()) {
+    val selectedCategory = remember {
+        mutableStateOf(-1)
+    }
+
+    Card(elevation = 0.dp, modifier = Modifier.fillMaxWidth()) {
 
         Column(Modifier.padding(horizontal = 20.dp, vertical = 10.dp)) {
             Text(text = "ORDER FOR DELIVERY", fontWeight = FontWeight.Bold)
@@ -233,17 +237,18 @@ fun MenuCategories(categories: Set<String>, categoryLambda: (sel: String) -> Uni
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
 
-                CategoryButton(category = "All") {
+                CategoryButton(category = "All", selectedCategory.value == -1) {
                     cat.value = it.lowercase()
                     categoryLambda(it.lowercase())
+                    selectedCategory.value = -1
                 }
 
-                for (category in categories) {
-                    CategoryButton(category = category) {
+                categories.forEachIndexed { index, category ->
+                    CategoryButton(category = category, selectedCategory.value == index) {
                         cat.value = it
                         categoryLambda(it)
+                        selectedCategory.value = index
                     }
-
                 }
 
             }
@@ -252,7 +257,7 @@ fun MenuCategories(categories: Set<String>, categoryLambda: (sel: String) -> Uni
 }
 
 @Composable
-fun CategoryButton(category: String, selectedCategory: (sel: String) -> Unit) {
+fun CategoryButton(category: String, isSelected: Boolean, selectedCategory: (sel: String) -> Unit) {
     val isClicked = remember {
         mutableStateOf(false)
     }
@@ -260,9 +265,9 @@ fun CategoryButton(category: String, selectedCategory: (sel: String) -> Unit) {
         onClick = {
             isClicked.value = !isClicked.value
             selectedCategory(category)
-
         }, colors = ButtonDefaults.buttonColors(
-            contentColor = PrimaryGreen, backgroundColor = Secondary2
+            contentColor = PrimaryGreen,
+            backgroundColor = if (isSelected) PrimaryYellow else Secondary2
         )
     ) {
         Text(text = category)
