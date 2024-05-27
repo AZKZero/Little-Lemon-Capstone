@@ -21,6 +21,7 @@ fun NavigationComposable(context: Context,navController: NavHostController) {
 
     NavHost(navController = navController, startDestination = startDestination){
         composable(Onboarding.route){
+            Onboarding(context, navController)
         }
         composable(Home.route){
             Home(navController)
