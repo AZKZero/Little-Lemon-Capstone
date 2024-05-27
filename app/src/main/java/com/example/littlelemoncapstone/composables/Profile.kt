@@ -57,7 +57,7 @@ fun Profile(context: Context, navHostController: NavHostController) {
         OutlinedTextField(
             enabled = false,
             readOnly = true,
-            value = firstName.value!!,
+            value = firstName.value?:"a",
             onValueChange ={},
             label = { Text(text = "First Name")},
             singleLine = true,

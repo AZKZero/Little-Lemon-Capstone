@@ -26,7 +26,7 @@ import com.example.littlelemoncapstone.ui.theme.PrimaryGreen
 
 @Composable
 fun Onboarding(context: Context, navHostController: NavHostController) {
-    val  sharedPreferences = context.getSharedPreferences("Little Lemon", Context.MODE_PRIVATE)
+    val  sharedPreferences = context.getSharedPreferences("little_lemon_user_profile", Context.MODE_PRIVATE)
     val firstName = remember {
         mutableStateOf("")
     }
